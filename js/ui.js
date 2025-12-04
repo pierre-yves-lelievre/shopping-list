@@ -91,7 +91,7 @@ function updateTotalDisplay() {
 
     totalEl.textContent = total.toFixed(2);
 
-    const limit = currentList ? currentList.spendingLimit || 0 : 0;
+    const limit = currentList ? currentList.spendingLimit || 20 : 20;
 
     if (limitValue) {
         limitValue.textContent = limit.toString();
@@ -118,7 +118,7 @@ function syncSpendingLimitControls() {
 
     if (!limitRange || !limitValue) return;
 
-    const limit = currentList ? currentList.spendingLimit || 0 : 0;
+    const limit = currentList ? currentList.spendingLimit || 20 : 20;
 
     limitRange.value = limit;
     limitValue.textContent = limit.toString();
