@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Smart Shopping List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Interactive Groceries shopping list, never forget anything with our intuitive, easy to use supermarket shopping list tool">
+  <meta name="keywords" content="Shopping List, Groceries">
+  <meta name="author" content="Pierre-Yves Lelievre">
+  
+  <link rel='stylesheet' href='css/main.css'  /> 
+</head>
+<body class="logged-out">
+  <h1>Smart Shopping List</h1>
+
+  <div class="page-wrapper">
+
+    <!-- LOGIN SECTION -->
+    <section id="login-section" class="section">
+      <div class="login-block">
+        <h2>Login</h2>
+          <form id="login-form" autocomplete="off">
+            <div>
+              <label for="username">Username</label><br />
+              <input type="text" id="username" name="username" autocomplete="username" required />
+            </div>
+            <div>
+              <label for="password">Password</label><br />
+              <input type="password" id="password" name="password" autocomplete="current-password" required />
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary">Log in</button>
+            </div>
+          </form>
+      </div>  
+      <div>
+        <div id="login-error" aria-live="polite"></div>
+      </div>
+    </section>
+ <!-- LOGGED IN SECTION + LOGOUT BUTTON -->    
+<section id="logout-section" class="section">
+  <div class="logout-wrapper">
+    <div id="login-status" aria-live="polite"></div>
+    <button
+      id="logout-button"
+      class="btn btn-secondary"
+      type="button"
+      style="display: none;"
+    >
+      Log out
+    </button>
+  </div>
+</section>
+
+    <!-- SHOPPING LIST SECTION -->
+    <section id="shopping-section" class="section" aria-label="Shopping list">
+      <!-- Header: Title + Controls -->
+      <div class="shopping-header">
+        <h2>Your Shopping List</h2>
+        <div class="shopping-actions">
+          <button id="add-item-button" class="btn btn-primary" type="button">
+            + Add Item
+          </button>
+          <button id="share-list-button" class="btn btn-secondary" type="button">
+            Share by Email
+          </button>
+          <button id="clear-list-button" class="btn btn-danger" type="button">
+            Clear List
+          </button>
+        </div>
+      </div>
+
+      <!-- SHOPPING LIST CONTAINER  -->
+      <div id="shopping-list-container">
+        <p id="empty-list-placeholder">Your shopping list is empty. Add your first item!</p>
+      </div>
+
+      <!-- FOOTER: TOTAL + SPENDING LIMIT -->
+      <div class="shopping-footer">
+        <div class="spending-limit">
+          <label for="spending-limit-range" class="spending-limit-width">
+            Spending limit: £<span id="spending-limit-value">0</span>
+          </label>
+          <input
+            type="range"
+            id="spending-limit-range"
+            min="0"
+            max="200"
+            step="5"
+            value="0"
+          />
+        </div>
+
+        <div class="total-block">
+          <span class="total-display" aria-live="polite">
+            Total: £<span id="shopping-total">0.00</span>
+          </span>
+          
+        </div>
+       
+      </div>
+      <!-- SPENDING LIMIT WARNING MESSAGE -->
+      <div class="total-warning"> <span id="total-warning"></span></div>
+    </section>
+
+  </div>
+
+  <!-- ADD ITEM OVERLAY -->
+  <div id="add-item-overlay-backdrop" role="dialog" aria-modal="true" aria-labelledby="add-item-title">
+    <div id="add-item-overlay">
+      <h3 id="add-item-title">Add Item</h3>
+      <form id="add-item-form">
+        <div>
+          <label for="item-select">Item</label>
+          <select id="item-select" name="item">
+            <option value="">Select an item…</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Description</label>
+          <div id="item-description" class="item-desc"></div>
+        </div>
+
+        <div>
+          <label for="item-quantity">Quantity</label>
+          <input
+            type="number"
+            id="item-quantity"
+            name="quantity"
+            min="1"
+            step="1"
+            value="1"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="item-price">Unit price (£)</label>
+          <input
+            type="number"
+            id="item-price"
+            name="price"
+            min="0"
+            step="0.01"
+            value="0.00"
+            required
+          />
+        </div>
+
+        <div class="overlay-actions">
+          <button type="button" id="cancel-add-item" class="btn btn-secondary">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-primary">
+            Add to List
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<script src="js/shopping_list_items.js"></script>
+<script src="js/login.js" defer></script>
+<script src="js/ui.js" defer></script>  
+<script src="js/shopping_list_helpers.js" defer></script>  
+</body>
+</html>

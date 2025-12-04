@@ -1,0 +1,351 @@
+body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .page-wrapper {
+      max-width: 960px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+    }
+
+    .section {
+      margin-bottom: 24px;
+    }
+
+    .section h2 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    /* Login */
+    .logged-in #login-section {
+      display:none;
+    }
+
+    #login-section {
+      border-bottom: 1px solid #eee;
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #login-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    #login-form label {
+      font-size: 0.9rem;
+    }
+
+    #login-form input {
+      padding: 6px 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    .btn {
+      padding: 8px 14px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .btn-primary {
+      background: #0070f3;
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: #eee;
+      color: #333;
+    }
+
+    .btn-danger {
+      background: #dc3545;
+      color: #fff;
+    }
+
+    @media(max-width: 600px) {
+        #login-form {
+          align-items: center;
+          flex-direction: column;
+        }
+    }
+    
+
+ /* Shopping list */
+    .logged-out #shopping-section {
+      display:none;
+      pointer-events: none;
+    }
+
+    .logged-in #shopping-section {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+ 
+    .shopping-header,
+    .shopping-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+.shopping-footer{
+  padding-bottom:15px;
+  padding-top:15px;
+}
+
+    .shopping-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    #shopping-list-container {
+      margin-top: 12px;
+      border: 1px solid #eee;
+      border-radius: 6px;
+      padding: 10px;
+      min-height: 80px;
+      background: #fafafa;
+    }
+
+ #shopping-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.shopping-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  background: #ffffff;
+  cursor:grab;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.item-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+/* Bigger touch-friendly checkbox */
+.item-main label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.item-picked {
+  width: 22px;
+  height: 22px;
+  accent-color: #0070f3; /* modern browsers */
+  transform: scale(1.2);
+}
+
+/* Name / description */
+.item-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.item-picked-label {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.item-desc {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* Controls on the right */
+.item-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.item-qty-block label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.item-qty {
+  width: 56px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+}
+
+.item-price-block {
+  text-align: right;
+}
+
+.item-price-block strong {
+  display: block;
+}
+
+.item-controls-disabled {
+  opacity: 0.5;
+}
+
+.item-controls-disabled .btn {
+  cursor: default;
+}
+
+/* Make rows stack nicely on small screens */
+@media (max-width: 640px) {
+  .shopping-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .item-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .shopping-header, .shopping-footer {
+    flex-direction: column;
+    gap: 20px;
+}
+
+  .total-warning{text-align: center}
+  
+  .btn {
+    padding: 10px 10px;
+  }
+}
+
+
+    /* Overlay */
+    #add-item-overlay-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      display: none; /* you’ll toggle this with JS */
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    #add-item-overlay {
+      background: #fff;
+      padding: 16px 18px;
+      border-radius: 8px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    #add-item-overlay h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+
+    #add-item-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    #add-item-form label {
+      font-size: 0.9rem;
+    }
+
+    #add-item-form input,
+    #add-item-form textarea,
+    #add-item-form select {
+      width: 100%;
+      padding: 6px 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 0.9rem;
+      box-sizing: border-box;
+    }
+
+    #add-item-form textarea {
+      resize: vertical;
+      min-height: 50px;
+    }
+
+    .overlay-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .spending-limit {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+    }
+
+.spending-limit-width {
+  min-width:140px;
+}
+#spending-limit-value{font-weight: bold}
+
+    .total-display {
+      font-weight: bold;
+    }
+
+    #total-warning {
+      color: #d9534f;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding-top: 10px;
+    }
+  .total-display.over-limit {
+  color: #d9534f;
+}
+  .total-block
+  {
+ 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.logout-wrapper{    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;}
