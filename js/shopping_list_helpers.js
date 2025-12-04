@@ -35,8 +35,6 @@ function loadShoppingListForUser(username) {
     if (placeholder) {
         if (list.items.length === 0) {
             placeholder.textContent = `Your shopping list is empty, ${username}. Add your first item!`;
-        } else {
-            placeholder.textContent = `You have ${list.items.length} items in your shopping list, ${username}.`;
         }
     }
 
