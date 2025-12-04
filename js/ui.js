@@ -124,6 +124,24 @@ function syncSpendingLimitControls() {
     limitValue.textContent = limit.toString();
 }
 
+function clearCurrentList() {
+    if (!currentUser) return;
+
+    const confirmClear = window.confirm(
+          "Are you sure you want to clear your shopping list?"
+    );
+    if (!confirmClear) return;
+
+    const storageKey = getStorageKeyForUser(currentUser.username);
+    localStorage.removeItem(storageKey);
+
+    currentList = {
+        items: [],
+        spendingLimit: 0
+      };
+    renderShoppingList();
+  }
+
 function populateItemSelect() {
     const select = document.getElementById("item-select");
     const priceInput = document.getElementById("item-price");

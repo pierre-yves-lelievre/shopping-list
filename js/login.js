@@ -112,26 +112,6 @@
       restoreCurrentUser();
   });
 
-  function clearCurrentList() {
-      if (!currentUser) return;
-
-      const confirmClear = window.confirm(
-          "Are you sure you want to clear your shopping list?"
-      );
-      if (!confirmClear) return;
-
-      const storageKey = getStorageKeyForUser(currentUser.username);
-      localStorage.removeItem(storageKey);
-
-      currentList = {
-          items: [],
-          spendingLimit: 0
-      };
-      renderShoppingList();
-  }
-
-
-
   function shareListByEmail() {
       if (!currentUser) {
           alert("Please log in before sharing your shopping list.");
