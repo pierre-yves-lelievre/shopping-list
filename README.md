@@ -1,4 +1,4 @@
-# Shopping List (Mayden Coding Challenge)
+# Shopping List
 
 A small, mobile-friendly supermarket shopping list app built with **HTML**, **CSS**, and **vanilla JavaScript**.
 
