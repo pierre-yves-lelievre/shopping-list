@@ -54,35 +54,34 @@ function saveCurrentList() {
 
 
 //List operations
-
-function addItemToCurrentList(itemId, quantity, unitPrice, description) {
-    if (!currentUser || !currentList) {
-        alert("Please log in first.");
-        return;
+function addItemToList(list, groceryItems, itemId, quantity, unitPrice, description) {
+    if (!list || !Array.isArray(list.items)) {
+        throw new Error("addItemToList: 'list' must have an items array");
     }
 
-    const baseItem = GROCERY_ITEMS.find((item) => item.id === itemId);
+    const baseItem = groceryItems.find((item) => item.id === itemId);
     if (!baseItem) {
-        alert("Please select a valid item.");
-        return;
+        throw new Error(`addItemToList: unknown item id ${itemId}`);
     }
 
     const qty = Number(quantity) || 0;
     const price = Number(unitPrice) || 0;
 
     if (qty <= 0 || price < 0) {
-        alert("Please enter a valid quantity and price.");
+        // no-op for invalid values in the pure helper
         return;
     }
 
-    // Check if item already exists in the list
-    const existing = currentList.items.find((it) => it.id === itemId);
+    const existing = list.items.find((it) => it.id === itemId);
 
     if (existing) {
         existing.quantity += qty;
         existing.unitPrice = price;
+        if (description) {
+            existing.description = description;
+        }
     } else {
-        currentList.items.push({
+        list.items.push({
             id: itemId,
             name: baseItem.name,
             description: description || baseItem.description || "",
@@ -91,6 +90,15 @@ function addItemToCurrentList(itemId, quantity, unitPrice, description) {
             picked: false
         });
     }
+}
+
+function addItemToCurrentList(itemId, quantity, unitPrice, description) {
+    if (!currentUser || !currentList) {
+        alert("Please log in first.");
+        return;
+    }
+
+    addItemToList(currentList, GROCERY_ITEMS, itemId, quantity, unitPrice, description);
 
     saveCurrentList();
     renderShoppingList();
@@ -119,7 +127,7 @@ function updateItemQuantity(itemId, newQty) {
     item.quantity = qty;
     saveCurrentList();
     renderShoppingList();
-} 
+}
 
 function toggleItemPicked(itemId, picked) {
     if (!currentList) return;
@@ -131,19 +139,28 @@ function toggleItemPicked(itemId, picked) {
     renderShoppingList();
 }
 
+function moveItemInList(list, fromIndex, toIndex) {
+  if (!list || !Array.isArray(list.items)) return;
+  if (fromIndex === toIndex) return;
+
+  const items = list.items;
+
+  if (
+    fromIndex < 0 || fromIndex >= items.length ||
+    toIndex   < 0 || toIndex   >= items.length
+  ) {
+    return;
+  }
+
+  const [moved] = items.splice(fromIndex, 1);
+  items.splice(toIndex, 0, moved);
+}
+
+
 function moveItemInCurrentList(fromIndex, toIndex) {
     if (!currentList || fromIndex === toIndex) return;
 
-    const items = currentList.items;
-    if (
-        fromIndex < 0 || fromIndex >= items.length ||
-        toIndex < 0 || toIndex >= items.length
-    ) {
-        return;
-    }
-
-    const [moved] = items.splice(fromIndex, 1);
-    items.splice(toIndex, 0, moved);
+    moveItemInList(currentList, fromIndex, toIndex);
 
     saveCurrentList();
     renderShoppingList();
