@@ -66,7 +66,6 @@ function addItemToList(list, groceryItems, itemId, quantity, unitPrice, descript
     const price = Number(unitPrice) || 0;
 
     if (qty <= 0 || price < 0) {
-        // no-op for invalid values in the pure helper
         return;
     }
 
